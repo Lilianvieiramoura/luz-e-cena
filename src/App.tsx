@@ -1,8 +1,9 @@
-function App() {
+import Banner from "./components/Banner"
 
+function App() {
   return (
-    <h1>ola</h1>
+    <Banner src="./public/Imagens/banner.png" alt="Banner" />
   )
 }
 
-export default App
+export default App;
