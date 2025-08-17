@@ -3,7 +3,7 @@ import styles from '../Header.module.css';
 
 const HeaderList = ({ children } : React.HtmlHTMLAttributes<HTMLUListElement>) => {
   return (
-    <ul className={styles.cabeclho}>{children}</ul>
+    <ul className={styles.cabecalho}>{children}</ul>
   )
 }
 
