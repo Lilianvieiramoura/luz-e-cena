@@ -4,92 +4,27 @@ import Fieldset from '../Fieldset';
 import InputText from '../InputText';
 import styles from './MovieSection.module.css';
 import MovieList from '../MovieList';
+import { useEffect, useState } from 'react';
 import type { Movie } from '../types';
-
-const movies: Movie[] = [
-    {
-        id: 1,
-        src: "/Cards/amanhecer.png",
-        alt: "Imagem do filme Amanhecer",
-        titulo: "Amanhecer",
-        categoria: "2D",
-        censura: "Livre",
-        genero: "Romance",
-        duracao: 90,
-    },
-    {
-        id: 2,
-        src: "/Cards/amigoDaSombra.png",
-        alt: "Imagem do filme Amigo da sombra",
-        titulo: "Amigo da sombra",
-        categoria: "2D",
-        censura: "12 anos",
-        genero: "Suspense",
-        duracao: 110,
-    },
-    {
-        id: 3,
-        src: "/Cards/bosqueMagico.png",
-        alt: "Imagem do filme Amigo do bosque mágico",
-        titulo: "Amigo do bosque mágico",
-        categoria: "2D",
-        censura: "Livre",
-        genero: "Animação",
-        duracao: 60,
-    },
-    {
-        id: 4,
-        src: "Cards/abismo.png",
-        alt: "Imagem do filme Caminho para o abismo",
-        titulo: "Caminho para o abismo",
-        categoria: "2D",
-        censura: "14 anos",
-        genero: "Horror",
-        duracao: 103,
-    },
-    {
-        id: 5,
-        src: "Cards/desastres.png",
-        alt: "Imagem do filme Desastres do Escritório",
-        titulo: "Desastres do Escritório",
-        categoria: "2D",
-        censura: "Livre",
-        genero: "Comédia",
-        duracao: 85,
-    },
-    {
-        id: 6,
-        src: "/Cards/mestres.png",
-        alt: "Imagem do filme Mestres do Futuro",
-        titulo: "Mestres do Futuro",
-        categoria: "2D",
-        censura: "Livre",
-        genero: "Documentário",
-        duracao: 120,
-    },
-    {
-        id: 7,
-        src: "/Cards/laEsperanza.png",
-        alt: "Imagem do filme La Esperanza",
-        titulo: "La Esperanza",
-        categoria: "2D",
-        censura: "12 anos",
-        genero: "Drama",
-        duracao: 98,
-    },
-    {
-        id: 8,
-        src: "Cards/oNexus.png",
-        alt: "Imagem do filme O nexus do tempo",
-        titulo: "O nexus do tempo",
-        categoria: "3D",
-        censura: "10 anos",
-        genero: "Ficcção Científica",
-        duracao: 105,
-    },
-];
+import { getMovies } from '../../api';
 
 const MovieSection = () => {
+
+  const [movies, setMovies] = useState<Movie[]>([]);
+
+  const fetchMovies = async () => {
+    try {
+      const movies = await getMovies();
+      setMovies(movies);
+    } catch (error) {
+      console.error("Erro ao buscar filmes" + error);
+    }
+  };
+
+  useEffect(() => {
+    fetchMovies();
+  });
+
   return (
     <main>
       <section className={styles.container}>
